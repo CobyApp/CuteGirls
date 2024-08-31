@@ -13,7 +13,13 @@
 		CB06C34A2C81B55D00F2D323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB06C3492C81B55D00F2D323 /* Preview Assets.xcassets */; };
 		CB06C3522C81B60900F2D323 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB06C3512C81B60900F2D323 /* CameraManager.swift */; };
 		CB06C3542C81B72600F2D323 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB06C3532C81B72600F2D323 /* CameraView.swift */; };
-		CB06C3562C81B73E00F2D323 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB06C3552C81B73E00F2D323 /* ViewModel.swift */; };
+		CB225C342C82BD7B00500D7E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB225C332C82BD7B00500D7E /* HomeView.swift */; };
+		CB3116D22C83718000594A8C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3116D12C83718000594A8C /* UIImage+Assets.swift */; };
+		CB3116D72C837C1C00594A8C /* TakePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3116D62C837C1C00594A8C /* TakePhotoView.swift */; };
+		CB3116D92C837C4600594A8C /* TakePhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3116D82C837C4600594A8C /* TakePhotoStore.swift */; };
+		CB4A40102C836D1F00D46356 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A400F2C836D1F00D46356 /* HomeStore.swift */; };
+		CBE228D52C836EFF004DFD60 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CBE228D42C836EFF004DFD60 /* ComposableArchitecture */; };
+		CBE228D82C836F56004DFD60 /* CobyDS in Frameworks */ = {isa = PBXBuildFile; productRef = CBE228D72C836F56004DFD60 /* CobyDS */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +30,11 @@
 		CB06C3492C81B55D00F2D323 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB06C3512C81B60900F2D323 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		CB06C3532C81B72600F2D323 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		CB06C3552C81B73E00F2D323 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		CB225C332C82BD7B00500D7E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		CB3116D12C83718000594A8C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
+		CB3116D62C837C1C00594A8C /* TakePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoView.swift; sourceTree = "<group>"; };
+		CB3116D82C837C4600594A8C /* TakePhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoStore.swift; sourceTree = "<group>"; };
+		CB4A400F2C836D1F00D46356 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE228D82C836F56004DFD60 /* CobyDS in Frameworks */,
+				CBE228D52C836EFF004DFD60 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,12 +69,9 @@
 		CB06C3412C81B55B00F2D323 /* CuteGirls */ = {
 			isa = PBXGroup;
 			children = (
-				CB06C3502C81B60000F2D323 /* Utils */,
-				CB06C3422C81B55B00F2D323 /* CuteGirlsApp.swift */,
-				CB06C3442C81B55B00F2D323 /* ContentView.swift */,
-				CB06C3532C81B72600F2D323 /* CameraView.swift */,
-				CB06C3552C81B73E00F2D323 /* ViewModel.swift */,
-				CB06C3462C81B55D00F2D323 /* Assets.xcassets */,
+				CB225C302C82BD4600500D7E /* Presentation */,
+				CB225C352C82BD8D00500D7E /* Supports */,
+				CB225C362C82BDA500500D7E /* Resource */,
 				CB06C3482C81B55D00F2D323 /* Preview Content */,
 			);
 			path = CuteGirls;
@@ -84,6 +93,69 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		CB225C302C82BD4600500D7E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CB225C312C82BD6500500D7E /* Home */,
+				CB225C322C82BD6A00500D7E /* TakePhotoView */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CB225C312C82BD6500500D7E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CB225C332C82BD7B00500D7E /* HomeView.swift */,
+				CB4A400F2C836D1F00D46356 /* HomeStore.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CB225C322C82BD6A00500D7E /* TakePhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				CB3116D32C83768800594A8C /* Component */,
+				CB3116D62C837C1C00594A8C /* TakePhotoView.swift */,
+				CB3116D82C837C4600594A8C /* TakePhotoStore.swift */,
+			);
+			path = TakePhotoView;
+			sourceTree = "<group>";
+		};
+		CB225C352C82BD8D00500D7E /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				CB06C3502C81B60000F2D323 /* Utils */,
+				CB225C372C82BDB900500D7E /* Extensions */,
+				CB06C3422C81B55B00F2D323 /* CuteGirlsApp.swift */,
+				CB06C3442C81B55B00F2D323 /* ContentView.swift */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		CB225C362C82BDA500500D7E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CB06C3462C81B55D00F2D323 /* Assets.xcassets */,
+				CB3116D12C83718000594A8C /* UIImage+Assets.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		CB225C372C82BDB900500D7E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CB3116D32C83768800594A8C /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CB06C3532C81B72600F2D323 /* CameraView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -100,6 +172,10 @@
 			dependencies = (
 			);
 			name = CuteGirls;
+			packageProductDependencies = (
+				CBE228D42C836EFF004DFD60 /* ComposableArchitecture */,
+				CBE228D72C836F56004DFD60 /* CobyDS */,
+			);
 			productName = CuteGirls;
 			productReference = CB06C33F2C81B55B00F2D323 /* CuteGirls.app */;
 			productType = "com.apple.product-type.application";
@@ -128,6 +204,10 @@
 				Base,
 			);
 			mainGroup = CB06C3362C81B55B00F2D323;
+			packageReferences = (
+				CBE228D32C836EFF004DFD60 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				CBE228D62C836F56004DFD60 /* XCRemoteSwiftPackageReference "CobyDS" */,
+			);
 			productRefGroup = CB06C3402C81B55B00F2D323 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -154,10 +234,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB06C3562C81B73E00F2D323 /* ViewModel.swift in Sources */,
 				CB06C3452C81B55B00F2D323 /* ContentView.swift in Sources */,
+				CB3116D72C837C1C00594A8C /* TakePhotoView.swift in Sources */,
 				CB06C3522C81B60900F2D323 /* CameraManager.swift in Sources */,
+				CB4A40102C836D1F00D46356 /* HomeStore.swift in Sources */,
+				CB3116D92C837C4600594A8C /* TakePhotoStore.swift in Sources */,
+				CB225C342C82BD7B00500D7E /* HomeView.swift in Sources */,
 				CB06C3432C81B55B00F2D323 /* CuteGirlsApp.swift in Sources */,
+				CB3116D22C83718000594A8C /* UIImage+Assets.swift in Sources */,
 				CB06C3542C81B72600F2D323 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +301,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -274,7 +358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -295,22 +379,28 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.CuteGirls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -325,22 +415,28 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.CuteGirls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -366,6 +462,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBE228D32C836EFF004DFD60 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.14.0;
+			};
+		};
+		CBE228D62C836F56004DFD60 /* XCRemoteSwiftPackageReference "CobyDS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBE228D42C836EFF004DFD60 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBE228D32C836EFF004DFD60 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		CBE228D72C836F56004DFD60 /* CobyDS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBE228D62C836F56004DFD60 /* XCRemoteSwiftPackageReference "CobyDS" */;
+			productName = CobyDS;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB06C3372C81B55B00F2D323 /* Project object */;
 }
