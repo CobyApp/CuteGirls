@@ -17,6 +17,8 @@ extension UIImage {
     
     // Icon
     static let icCamera = UIImage(name: "camera")!
+    static let icCameraSwitch = UIImage(name: "cameraswitch")!
+    static let icRefresh = UIImage(name: "refresh")!
 }
 
 extension UIImage {

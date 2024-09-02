@@ -20,7 +20,7 @@ struct TakePhotoView: View {
     }
     
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 0) {
             TopBarView(
                 leftAction: {
                     self.store.send(.dismiss)
@@ -28,49 +28,78 @@ struct TakePhotoView: View {
                 title: "사진 찍기"
             )
             
-            VStack(spacing: 20) {
-                CameraView(image: self.$store.currentFrame)
-                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
-                
-                if store.isPhotoTaken {
-                    Button(action: {
-                        self.store.send(.retakePhoto)
-                    }) {
-                        Text("사진 새로 찍기")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(10)
-                    }
-                } else {
-                    Button(action: {
-                        self.store.send(.takePhoto)
-                    }) {
-                        Text("사진 찍기")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                    }
+            ScrollView {
+                VStack(spacing: 20) {
+                    CameraView(image: self.$store.currentFrame)
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
+                    
+                    CameraButtonsView()
+                    
+                    Spacer()
                 }
-                
-                Button(action: {
-                    self.store.send(.switchCamera)
-                }) {
-                    Image(systemName: "camera.rotate")
-                        .resizable()
-                        .frame(width: 44, height: 44)
-                        .padding()
-                }
-                .background(Color.white.opacity(0.7))
-                .clipShape(Circle())
+                .padding(.horizontal, BaseSize.horizantalPadding)
+                .padding(.vertical, 12)
             }
-            .padding(.horizontal, BaseSize.horizantalPadding)
             
-            Spacer()
+            Button {
+                if self.store.isPhotoTaken {
+                    
+                }
+            } label: {
+                Text("다음")
+            }
+            .buttonStyle(
+                CBButtonStyle(
+                    isDisabled: !self.store.isPhotoTaken,
+                    buttonColor: Color.pink50
+                )
+            )
+            .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.bottom, 20)
         }
         .onAppear {
             self.store.send(.startCamera)
+        }
+    }
+    
+    @ViewBuilder
+    private func CameraButtonsView() -> some View {
+        HStack(spacing: 16) {
+            Button(action: {
+                self.store.send(.retakePhoto)
+            }) {
+                Image(uiImage: UIImage.icRefresh)
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .padding(16)
+                    .background(Color.fillNormal)
+                    .clipShape(Circle())
+                    .foregroundColor(Color.labelNormal)
+            }
+            
+            Button(action: {
+                self.store.send(.takePhoto)
+            }) {
+                Image(uiImage: UIImage.icCamera)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(20)
+                    .background(Color.fillNormal)
+                    .clipShape(Circle())
+                    .foregroundColor(Color.labelNormal)
+            }
+            
+            Button(action: {
+                self.store.send(.switchCamera)
+            }) {
+                Image(uiImage: UIImage.icCameraSwitch)
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .padding(16)
+                    .background(Color.fillNormal)
+                    .clipShape(Circle())
+                    .foregroundColor(Color.labelNormal)
+            }
         }
     }
 }
