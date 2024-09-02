@@ -30,6 +30,7 @@ struct TakePhotoView: View {
             
             VStack(spacing: 20) {
                 CameraView(image: self.$store.currentFrame)
+                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
                 
                 Button(action: {
                     self.store.send(.takePhoto)

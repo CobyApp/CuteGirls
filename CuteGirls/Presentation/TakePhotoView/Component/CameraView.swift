@@ -13,22 +13,17 @@ struct CameraView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let sideLength = min(geometry.size.width, geometry.size.height)
-            
             if let image = image {
                 Image(decorative: image, scale: 1)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: sideLength, height: sideLength)
-                    .clipped()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
             } else {
                 ContentUnavailableView("Camera feed interrupted", systemImage: "xmark.circle.fill")
-                    .frame(width: sideLength, height: sideLength)
-                    .clipped()
             }
         }
-        .aspectRatio(1, contentMode: .fit)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(.rect(cornerRadius: 12))
+        .contentShape(Rectangle())
     }
 }
 
