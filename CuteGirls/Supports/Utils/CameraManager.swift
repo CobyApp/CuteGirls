@@ -28,7 +28,6 @@ class CameraManager: NSObject {
     private let captureSession = AVCaptureSession()
     private var deviceInput: AVCaptureDeviceInput?
     private var videoOutput: AVCaptureVideoDataOutput?
-    private var currentCameraPosition: AVCaptureDevice.Position = .front
 
     private var sessionQueue = DispatchQueue(label: "video.preview.session")
     private var isSessionRunning = false
@@ -71,12 +70,16 @@ class CameraManager: NSObject {
                 captureSession.removeInput(deviceInput)
             }
             
-            guard let newCamera = camera(with: currentCameraPosition),
+            guard let newCamera = camera(with: .front),
                   let newDeviceInput = try? AVCaptureDeviceInput(device: newCamera) else {
                 return
             }
             
             deviceInput = newDeviceInput
+            
+            if let videoOutput = videoOutput {
+                captureSession.removeOutput(videoOutput)
+            }
             
             let videoOutput = AVCaptureVideoDataOutput()
             videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
@@ -88,31 +91,28 @@ class CameraManager: NSObject {
             
             captureSession.addInput(newDeviceInput)
             captureSession.addOutput(videoOutput)
+            self.videoOutput = videoOutput
             
             if let connection = videoOutput.connection(with: .video) {
-                connection.videoOrientation = .portrait
-                connection.isVideoMirrored = currentCameraPosition == .front
+                Task {
+                    await MainActor.run {
+                        connection.videoRotationAngle = 90
+                        connection.isVideoMirrored = true
+                    }
+                }
             }
         }
     }
-    
+
     func camera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-        return AVCaptureDevice.devices(for: .video).first { $0.position == position }
-    }
-    
-    func switchCamera() {
-        Task {
-            await stopSession()
-            currentCameraPosition = currentCameraPosition == .front ? .back : .front
-            await configureSession()
-            await startSession()
-        }
+        let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
+                                                                mediaType: .video,
+                                                                position: position)
+        return discoverySession.devices.first { $0.position == position }
     }
     
     func startSession() async {
         guard await isAuthorized else { return }
-        
-        // Configure session before starting it
         await configureSession()
         
         sessionQueue.sync {
