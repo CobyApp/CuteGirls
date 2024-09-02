@@ -111,6 +111,10 @@ class CameraManager: NSObject {
     
     func startSession() async {
         guard await isAuthorized else { return }
+        
+        // Configure session before starting it
+        await configureSession()
+        
         sessionQueue.sync {
             if !isSessionRunning {
                 captureSession.startRunning()
