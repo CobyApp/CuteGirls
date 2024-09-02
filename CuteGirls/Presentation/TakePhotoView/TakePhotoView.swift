@@ -32,14 +32,26 @@ struct TakePhotoView: View {
                 CameraView(image: self.$store.currentFrame)
                     .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
                 
-                Button(action: {
-                    self.store.send(.takePhoto)
-                }) {
-                    Text("사진 찍기")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                if store.isPhotoTaken {
+                    Button(action: {
+                        self.store.send(.retakePhoto)
+                    }) {
+                        Text("사진 새로 찍기")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
+                } else {
+                    Button(action: {
+                        self.store.send(.takePhoto)
+                    }) {
+                        Text("사진 찍기")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
                 }
             }
             .padding(.horizontal, BaseSize.horizantalPadding)
@@ -48,9 +60,6 @@ struct TakePhotoView: View {
         }
         .onAppear {
             self.store.send(.startCamera)
-        }
-        .onDisappear {
-            self.store.send(.stopCamera)
         }
     }
 }

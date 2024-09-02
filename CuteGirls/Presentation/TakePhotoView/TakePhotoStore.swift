@@ -17,6 +17,7 @@ struct TakePhotoStore: Reducer {
     struct State: Equatable {
         var currentFrame: CGImage?
         var isCameraRunning: Bool = false
+        var isPhotoTaken: Bool = false // 사진이 찍혔는지 여부를 나타내는 상태 추가
     }
     
     enum Action: BindableAction, Equatable {
@@ -25,6 +26,7 @@ struct TakePhotoStore: Reducer {
         case startCamera
         case stopCamera
         case takePhoto
+        case retakePhoto // 새로 찍기 액션 추가
         case frameReceived(CGImage)
     }
     
@@ -60,11 +62,12 @@ struct TakePhotoStore: Reducer {
                 }
                 
             case .takePhoto:
-                if state.isCameraRunning {
-                    return .send(.stopCamera)
-                } else {
-                    return .send(.startCamera)
-                }
+                state.isPhotoTaken = true // 사진이 찍혔음을 표시
+                return .send(.stopCamera)
+                
+            case .retakePhoto:
+                state.isPhotoTaken = false // 사진 상태 초기화
+                return .send(.startCamera)
                 
             case .frameReceived(let image):
                 state.currentFrame = image
