@@ -8,22 +8,7 @@
 import AVFoundation
 import CoreImage
 
-import ComposableArchitecture
-
-private struct CameraManagerKey: DependencyKey {
-    static var liveValue: CameraManager = .shared
-}
-
-extension DependencyValues {
-    var cameraManager: CameraManager {
-        get { self[CameraManagerKey.self] }
-        set { self[CameraManagerKey.self] = newValue }
-    }
-}
-
 class CameraManager: NSObject {
-    
-    static let shared = CameraManager()
     
     private let captureSession = AVCaptureSession()
     private var deviceInput: AVCaptureDeviceInput?
@@ -101,6 +86,24 @@ class CameraManager: NSObject {
                     }
                 }
             }
+        }
+    }
+    
+    func terminateSession() async {
+        await stopSession()
+        
+        sessionQueue.sync {
+            if let deviceInput = deviceInput {
+                captureSession.removeInput(deviceInput)
+                self.deviceInput = nil
+            }
+            
+            if let videoOutput = videoOutput {
+                captureSession.removeOutput(videoOutput)
+                self.videoOutput = nil
+            }
+            
+            addToPreviewStream = nil
         }
     }
 
