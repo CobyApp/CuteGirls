@@ -32,9 +32,9 @@ struct TakePhotoView: View {
                 CameraView(image: self.$store.currentFrame)
                 
                 Button(action: {
-                    self.store.send(.switchCamera)
+                    self.store.send(.takePhoto)
                 }) {
-                    Text("카메라 전환")
+                    Text("사진 찍기")
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.blue)

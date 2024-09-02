@@ -24,8 +24,8 @@ struct TakePhotoStore: Reducer {
         case dismiss
         case startCamera
         case stopCamera
+        case takePhoto
         case frameReceived(CGImage)
-        case switchCamera
     }
     
     @Dependency(\.dismiss) private var dismiss
@@ -59,12 +59,15 @@ struct TakePhotoStore: Reducer {
                     await cameraManager.stopSession()
                 }
                 
+            case .takePhoto:
+                if state.isCameraRunning {
+                    return .send(.stopCamera)
+                } else {
+                    return .send(.startCamera)
+                }
+                
             case .frameReceived(let image):
                 state.currentFrame = image
-                return .none
-                
-            case .switchCamera:
-                cameraManager.switchCamera()
                 return .none
             }
         }
