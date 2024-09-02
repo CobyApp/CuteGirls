@@ -18,7 +18,7 @@ struct TakePhotoStore: Reducer {
         var currentFrame: CGImage?
         var isCameraRunning: Bool = false
         var isPhotoTaken: Bool = false
-        var cameraManager: CameraManager? = nil // CameraManager를 상태로 관리
+        var cameraManager: CameraManager? = nil
     }
     
     enum Action: BindableAction, Equatable {
@@ -28,6 +28,7 @@ struct TakePhotoStore: Reducer {
         case stopCamera
         case takePhoto
         case retakePhoto
+        case switchCamera
         case frameReceived(CGImage)
         case cameraStarted(CameraManager)
         case cameraStopped
@@ -89,6 +90,13 @@ struct TakePhotoStore: Reducer {
             case .retakePhoto:
                 state.isPhotoTaken = false
                 return .send(.startCamera)
+                
+            case .switchCamera:
+                return .run { [cameraManager = state.cameraManager] _ in
+                    if let cameraManager = cameraManager {
+                        await cameraManager.switchCamera()
+                    }
+                }
                 
             case .frameReceived(let image):
                 state.currentFrame = image

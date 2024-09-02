@@ -40,6 +40,8 @@ class CameraManager: NSObject {
         }
     }
     
+    private var cameraPosition: AVCaptureDevice.Position = .front
+    
     override init() {
         super.init()
     }
@@ -55,7 +57,7 @@ class CameraManager: NSObject {
                 captureSession.removeInput(deviceInput)
             }
             
-            guard let newCamera = camera(with: .front),
+            guard let newCamera = camera(with: cameraPosition),
                   let newDeviceInput = try? AVCaptureDeviceInput(device: newCamera) else {
                 return
             }
@@ -82,13 +84,18 @@ class CameraManager: NSObject {
                 Task {
                     await MainActor.run {
                         connection.videoRotationAngle = 90
-                        connection.isVideoMirrored = true
+                        connection.isVideoMirrored = (cameraPosition == .front)
                     }
                 }
             }
         }
     }
     
+    func switchCamera() async {
+        cameraPosition = (cameraPosition == .front) ? .back : .front
+        await configureSession()
+    }
+
     func terminateSession() async {
         await stopSession()
         

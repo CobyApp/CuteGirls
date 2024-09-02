@@ -53,6 +53,17 @@ struct TakePhotoView: View {
                             .cornerRadius(10)
                     }
                 }
+                
+                Button(action: {
+                    self.store.send(.switchCamera)
+                }) {
+                    Image(systemName: "camera.rotate")
+                        .resizable()
+                        .frame(width: 44, height: 44)
+                        .padding()
+                }
+                .background(Color.white.opacity(0.7))
+                .clipShape(Circle())
             }
             .padding(.horizontal, BaseSize.horizantalPadding)
             
